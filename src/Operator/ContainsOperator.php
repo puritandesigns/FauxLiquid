@@ -10,10 +10,10 @@ class ContainsOperator extends AbstractBinary
     public function compile(Compiler $compiler) : void
     {
         $compiler
-            ->raw('(in_array(')
-            ->subcompile($this->getNode('right'))
-            ->raw(', ')
+            ->raw('(\\FauxLiquid\\Support\\Operators::contains(')
             ->subcompile($this->getNode('left'))
+            ->raw(', ')
+            ->subcompile($this->getNode('right'))
             ->raw('))')
         ;
     }
