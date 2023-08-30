@@ -18,13 +18,16 @@ class FauxLiquidExtension extends AbstractExtension
 
     public function getFilters()
     {
+        $money_with_currency = function ($money) {
+            return '$' . Filters::centsToDollars($money);
+        };
+
         return [
             new \Twig\TwigFilter('money_without_currency', function ($money) {
                 return Filters::centsToDollars($money);
             }),
-            new \Twig\TwigFilter('money', function ($money) {
-                return '$' . Filters::centsToDollars($money);
-            }),
+            new \Twig\TwigFilter('money_with_currency', $money_with_currency),
+            new \Twig\TwigFilter('money', $money_with_currency),
         ];
     }
 

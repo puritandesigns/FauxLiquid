@@ -6,7 +6,7 @@ class Filters
 {
     public static function dollarsToCents($money): int
     {
-        if (is_float($money)) {
+        if (self::hasDecimal($money)) {
             return $money * 100;
         }
 
@@ -15,10 +15,15 @@ class Filters
 
     public static function centsToDollars($money)
     {
-        if (is_int($money)) {
+        if (! self::hasDecimal($money)) {
             return number_format($money / 100, 2);
         }
 
         return $money;
+    }
+
+    public static function hasDecimal($money)
+    {
+        return str_contains($money, '.') || (floor($money) != $money);
     }
 }
