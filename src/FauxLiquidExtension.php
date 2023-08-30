@@ -3,6 +3,10 @@
 namespace FauxLiquid;
 
 use FauxLiquid\Operator\ContainsOperator;
+use FauxLiquid\Parser\AssignTokenParser;
+use FauxLiquid\Parser\CommentTokenParser;
+use FauxLiquid\Parser\IfTokenParser;
+use FauxLiquid\Parser\RenderTokenParser;
 use FauxLiquid\Parser\SchemaTokenParser;
 use FauxLiquid\Parser\UnlessTokenParser;
 use FauxLiquid\Support\Filters;
@@ -48,6 +52,10 @@ class FauxLiquidExtension extends AbstractExtension
     public function getTokenParsers()
     {
         return [
+            new AssignTokenParser(),
+            new CommentTokenParser(),
+            new IfTokenParser(),
+            new RenderTokenParser(),
             new SchemaTokenParser(),
             new UnlessTokenParser(),
         ];
